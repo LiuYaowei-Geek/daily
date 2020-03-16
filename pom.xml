@@ -191,5 +191,6 @@
         <module>transaction</module>
         <module>jvm</module>
         <module>concurrency</module>
+        <module>leetCode</module>
     </modules>
 </project>
