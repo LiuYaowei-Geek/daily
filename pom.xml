@@ -192,5 +192,6 @@
         <module>jvm</module>
         <module>concurrency</module>
         <module>leetCode</module>
+        <module>javaDesignPatterns</module>
     </modules>
 </project>
