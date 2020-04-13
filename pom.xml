@@ -193,5 +193,6 @@
         <module>concurrency</module>
         <module>leetCode</module>
         <module>javaDesignPatterns</module>
+        <module>algorithms</module>
     </modules>
 </project>
