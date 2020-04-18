@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.lyw.springboot</groupId>
     <artifactId>demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>demo</name>
     <description>Demo project for Spring Boot</description>
 
@@ -18,9 +18,9 @@
         <java.version>1.8</java.version>
         <dubbo.version>2.5.7.3</dubbo.version>
         <guava.version>23.0</guava.version>
-        <eventbus.version>0.0.1-SNAPSHOT</eventbus.version>
-        <distributedLock.version>0.0.1-SNAPSHOT</distributedLock.version>
-        <runner.version>0.0.1-SNAPSHOT</runner.version>
+        <eventbus.version>1.0.0-SNAPSHOT</eventbus.version>
+        <distributedLock.version>1.0.0-SNAPSHOT</distributedLock.version>
+        <runner.version>1.0.0-SNAPSHOT</runner.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
@@ -194,5 +194,7 @@
         <module>leetCode</module>
         <module>javaDesignPatterns</module>
         <module>algorithms</module>
+        <module>java</module>
+        <module>batchFile</module>
     </modules>
 </project>
