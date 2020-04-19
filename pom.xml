@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <dubbo.version>2.5.7.3</dubbo.version>
+        <dubbo.version>2.5.7</dubbo.version>
         <guava.version>23.0</guava.version>
         <eventbus.version>1.0.0-SNAPSHOT</eventbus.version>
         <distributedLock.version>1.0.0-SNAPSHOT</distributedLock.version>
@@ -32,6 +32,7 @@
         <spring-data-redis.version>1.8.7.RELEASE</spring-data-redis.version>
         <redis.client.version>2.9.0</redis.client.version>
         <redis.client.version>2.9.0</redis.client.version>
+        <elasticJob.version>2.1.5</elasticJob.version>
     </properties>
 
     <dependencyManagement>
@@ -97,6 +98,37 @@
                 <artifactId>jcl-over-slf4j</artifactId>
                 <version>${jcl-over-slf4j.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.dangdang</groupId>
+                <artifactId>elastic-job-lite-core</artifactId>
+                <version>${elasticJob.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -196,5 +228,6 @@
         <module>algorithms</module>
         <module>java</module>
         <module>batchFile</module>
+        <module>elastic-job</module>
     </modules>
 </project>
