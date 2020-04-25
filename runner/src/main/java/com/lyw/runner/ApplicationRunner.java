@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @author liuyaowei488
  * @date created in 2019-8-19 13:39
  */
-@SpringBootApplication(scanBasePackages = {"com.lyw"},
+@SpringBootApplication(scanBasePackages = {"com.lyw.*"},
         exclude = DataSourceAutoConfiguration.class)
 @ImportResource({
         "classpath*:/spring/applicationContext*.xml",

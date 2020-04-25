@@ -7,5 +7,5 @@ public interface Listener {
 
     void afterExecute(ExecutionContext context);
 
-    void handelException(ExecutionContext context, Exception e);
+    void handleException(ExecutionContext context, Exception e);
 }

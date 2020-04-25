@@ -27,4 +27,7 @@ public class ExecutionContext {
         fileResource = new FileResource(resource, charset);
     }
 
+    public void addData(String key, Object value) {
+        dataMap.put(key, value);
+    }
 }

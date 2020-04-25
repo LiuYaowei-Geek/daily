@@ -22,7 +22,7 @@ public abstract class AbstractTasklet implements Step {
         } catch (Exception e) {
             log.error("AbstractTasklet occurred error", e);
             if (null != listener) {
-                listener.handelException(context, e);
+                listener.handleException(context, e);
             }
             throw new StepExecuteException(e);
         }
