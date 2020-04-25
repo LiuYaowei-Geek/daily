@@ -251,7 +251,7 @@
         <module>distributedLock</module>
         <module>sout</module>
         <module>note</module>
-        <module>transaction</module>
+        <module>stateMachine</module>
         <module>jvm</module>
         <module>concurrency</module>
         <module>leetCode</module>
@@ -260,5 +260,8 @@
         <module>java</module>
         <module>batchFile</module>
         <module>elastic-job</module>
+        <module>redis</module>
+        <module>annotationInterface</module>
+        <module>synchronized</module>
     </modules>
 </project>
