@@ -43,6 +43,8 @@ AbortPolicy（默认）：直接抛弃
 CallerRunsPolicy：用调用者的线程执行任务  
 DiscardOldestPolicy：抛弃队列中最久的任务  
 DiscardPolicy：抛弃当前任务  
+###应用说明
+Java 线程池以有界队列的线程池为例，当新任务提交时，如果运行的线程少于 corePoolSize，则创建新线程来处理请求。如果正在运行的线程数等于 corePoolSize 时，则新任务被添加到队列中，直到队列满。当队列满了后，会继续开辟新线程来处理任务，但不超过 maximumPoolSize。当任务队列满了并且已开辟了最大线程数，此时又来了新任务，ThreadPoolExecutor 会拒绝服务。
 ##阿里开发手册
 >**线程池不使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样 的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。**  
 

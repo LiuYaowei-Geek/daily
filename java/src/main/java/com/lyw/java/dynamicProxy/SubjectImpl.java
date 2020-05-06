@@ -1,4 +1,4 @@
-package java.dynamicProxy;
+package com.lyw.java.dynamicProxy;
 
 /**
  * @author liuyaowei488
