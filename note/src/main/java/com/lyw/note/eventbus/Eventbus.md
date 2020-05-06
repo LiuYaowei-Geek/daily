@@ -1,6 +1,6 @@
 #Eventbus
 ##流程图
-![eventbus流程图](com/lyw/note/eventbus/pictures/Eventbus.png "流程图")
+![eventbus流程图](./pictures/Eventbus.png "eventbus流程图")
 ##创建线程池，初始化eventbus
 ```java
 @Slf4j
