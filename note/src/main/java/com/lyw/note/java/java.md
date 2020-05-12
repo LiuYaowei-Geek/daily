@@ -6,6 +6,18 @@
 5. 一字节等于8位
 6. 8种基本类型长度：byte = 1字节（8位）, shor = 2byte, char = 2byte, int = 4byte, float = 4byte, long = 8byte, double = 8byte, boolean = 1bit
 
+## 位运算
+### 异或运算 ^
+相同位，同为0，异为1
+### 与运算 &
+相同位的两个数字都为1，则为1；若有一个不为1，则为0。
+### 或运算 |
+相同位只要一个为1即为1
+### 右移运算 >>
+二进制，右移多少位，高位补零
+### 左移运算 <<
+二进制，左移多少位，高位补零
+
 ## 内存可见性和原子性：Synchronized和Volatile的比较
 [参考文章](https://blog.csdn.net/guyuealian/article/details/52525724)  
 ### Java内存模型
@@ -59,3 +71,117 @@ class Son9<E, E super T> extends Father<T>{}// 下面的写法也是错误的，
 ## 线程池
 
 ## hashCode与equals()
+
+## 集合
+1. Collection：List、Set、Queue。对象的集合
+2. Map：TreeMap、HashMap、HashTable。键值对映射表
+
+### Set
+TreeSet：基于红黑树实现，支持有序性操作，例如根据一个范围查找元素的操作。但是查找效率不如 HashSet，HashSet 查找的时间复杂度为 O(1)，TreeSet 则为 O(logN)。
+
+HashSet：基于哈希表实现，支持快速查找，但不支持有序性操作。并且失去了元素的插入顺序信息，也就是说使用 Iterator 遍历 HashSet 得到的结果是不确定的。
+
+LinkedHashSet：具有 HashSet 的查找效率，并且内部使用双向链表维护元素的插入顺序。
+
+### List
+ArrayList：基于动态数组实现，支持随机访问。
+
+Vector：和 ArrayList 类似，但它是线程安全的。
+
+LinkedList：基于双向链表实现，只能顺序访问，但是可以快速地在链表中间插入和删除元素。不仅如此，LinkedList 还可以用作栈、队列和双向队列。
+
+### Queue
+LinkedList：可以用它来实现双向队列。
+
+PriorityQueue：基于堆结构实现，可以用它来实现优先队列。
+
+### Map
+TreeMap：基于红黑树实现。
+
+HashMap：基于哈希表实现。
+
+HashTable：和 HashMap 类似，但它是线程安全的，这意味着同一时刻多个线程同时写入 HashTable 不会导致数据不一致。它是遗留类，不应该去使用它，而是使用 ConcurrentHashMap 来支持线程安全，ConcurrentHashMap 的效率会更高，因为 ConcurrentHashMap 引入了分段锁。
+
+LinkedHashMap：使用双向链表来维护元素的顺序，顺序为插入顺序或者最近最少使用（LRU）顺序。
+
+### ArrayList
+1. 默认大小为10，扩容newCapacity = oldCapacity + (oldCapacity >> 1)，新容量为旧容量的1.5倍，调用 Arrays.copyOf()把原数组整个复制到新数组中
+2. 删除元素调用System.arraycopy()将index+1后面的元素都复制到index位置上，该操作的时间复杂度为O(N)
+3. 序列化，保存元素的数组 elementData 使用 transient 修饰，该关键字声明数组默认不会被序列化。
+序列化时需要使用 ObjectOutputStream 的 writeObject() 将对象转换为字节流并输出。
+而 writeObject() 方法在传入的对象存在 writeObject() 的时候会去反射调用该对象的 writeObject() 来实现序列化。
+反序列化使用的是 ObjectInputStream 的 readObject() 方法
+4. modCount 用来记录 ArrayList 结构发生变化的次数。
+结构发生变化是指添加或者删除至少一个元素的所有操作，或者是调整内部数组的大小，仅仅只是设置元素的值不算结构发生变化。
+在进行序列化或者迭代等操作时，需要比较操作前后 modCount 是否改变，如果改变了需要抛出 ConcurrentModificationException。
+代码参考上节序列化中的 writeObject() 方法。
+
+### CopyOnWriteArrayList
+#### 读写分离
+写操作在一个复制的数组上进行，读操作还是在原始数组中进行，读写分离，互不影响。
+
+写操作需要加锁，防止并发写入时导致写入数据丢失。
+
+写操作结束之后需要把原始数组指向新的复制数组。
+```java
+public boolean add(E e) {
+        final ReentrantLock lock = this.lock;
+        lock.lock();
+        try {
+            Object[] elements = getArray();
+            int len = elements.length;
+            Object[] newElements = Arrays.copyOf(elements, len + 1);
+            newElements[len] = e;
+            setArray(newElements);
+            return true;
+        } finally {
+            lock.unlock();
+        }
+    }
+```
+
+#### 适用场景
+CopyOnWriteArrayList 在写操作的同时允许读操作，大大提高了读操作的性能，因此很适合读多写少的应用场景。
+
+但是 CopyOnWriteArrayList 有其缺陷：
+
+内存占用：在写操作时需要复制一个新的数组，使得内存占用为原来的两倍左右；
+数据不一致：读操作不能读取实时性的数据，因为部分写操作的数据还未同步到读数组中。
+
+所以 CopyOnWriteArrayList 不适合内存敏感以及对实时性要求很高的场景。
+
+### LinkedList
+#### 概览
+基于双向链表实现，使用 Node 存储链表节点信息。
+```java
+private static class Node<E> {
+        E item;
+        Node<E> next;
+        Node<E> prev;
+
+        Node(Node<E> prev, E element, Node<E> next) {
+            this.item = element;
+            this.next = next;
+            this.prev = prev;
+        }
+    }
+```
+
+每个链表存储了 first 和 last 指针
+```java
+transient Node<E> first;
+transient Node<E> last;
+```
+
+#### LinkedList与ArrayList的比较
+ArrayList 基于动态数组实现，LinkedList 基于双向链表实现。
+ArrayList 和 LinkedList 的区别可以归结为数组和链表的区别：
+
+数组支持随机访问，但插入删除的代价很高，需要移动大量元素；
+链表不支持随机访问，但插入删除只需要改变指针。
+
+### HashMap
+1. 位置要么在原位置，要么在增加2次幂的位置
+2. HashMap中，如果key经过hash算法得出的数组索引位置全部不相同，即Hash算法非常好，那样的话，getKey方法的时间复杂度就是O(1)，
+如果Hash算法技术的结果碰撞非常多，假如Hash算极其差，所有的Hash算法结果得出的索引位置一样，那样所有的键值对都集中到一个桶中，或者在一个链表中，或者在一个红黑树中，时间复杂度分别为O(n)和O(lgn)。
+3. 初始大小16。扩容每次变大2倍。大于等于8时，从8位置开始转为红黑树
