@@ -1,4 +1,4 @@
-package com.lyw.java.generic;
+package com.lyw.java.generic.genericExtends;
 
 public class Son6<T> extends Father<Integer> {
 

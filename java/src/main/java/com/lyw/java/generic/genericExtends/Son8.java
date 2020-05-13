@@ -1,4 +1,4 @@
-package com.lyw.java.generic;
+package com.lyw.java.generic.genericExtends;
 
 public class Son8<K extends T, T> extends Father<T> {
     K specialData;

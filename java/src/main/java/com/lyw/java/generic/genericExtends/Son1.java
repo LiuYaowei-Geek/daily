@@ -1,4 +1,4 @@
-package com.lyw.java.generic;
+package com.lyw.java.generic.genericExtends;
 
 public class Son1<T> extends Father<T> {
     public Son1(T data) {

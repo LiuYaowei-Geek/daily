@@ -1,5 +1,9 @@
-package com.lyw.java.generic;
+package com.lyw.java.generic.genericExtends;
 
+/**
+ * 泛型继承问题
+ * @param <T>
+ */
 public class Father<T> {
     T data;
 
