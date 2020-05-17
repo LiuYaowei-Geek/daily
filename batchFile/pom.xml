@@ -48,10 +48,10 @@
             <scope>provided</scope>
         </dependency>
         <!--hutool-->
-        <dependency>
+        <!--<dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-        </dependency>
+        </dependency>-->
         <!--fastjson-->
         <dependency>
             <groupId>com.alibaba</groupId>
