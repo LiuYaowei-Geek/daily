@@ -21,6 +21,9 @@
         <eventbus.version>1.0.0-SNAPSHOT</eventbus.version>
         <distributedLock.version>1.0.0-SNAPSHOT</distributedLock.version>
         <runner.version>1.0.0-SNAPSHOT</runner.version>
+        <spring.version>1.0.0-SNAPSHOT</spring.version>
+        <batchFile.version>1.0.0-SNAPSHOT</batchFile.version>
+        <lyw-java.version>1.0.0-SNAPSHOT</lyw-java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
@@ -37,16 +40,17 @@
         <spring-boot-test.version>2.1.7.RELEASE</spring-boot-test.version>
         <junit.version>4.12</junit.version>
         <fastJson.version>1.2.62</fastJson.version>
+        <cglib.version>3.2.5</cglib.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <!--project dependencies-->
-            <dependency>
+            <!--<dependency>
                 <groupId>com.lyw.springboot</groupId>
                 <artifactId>eventbus</artifactId>
                 <version>${eventbus.version}</version>
-            </dependency>
+            </dependency>-->
 
             <dependency>
                 <groupId>com.lyw.springboot</groupId>
@@ -58,6 +62,23 @@
                 <groupId>com.lyw.springboot</groupId>
                 <artifactId>runner</artifactId>
                 <version>${runner.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lyw.springboot</groupId>
+                <artifactId>spring</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lyw.springboot</groupId>
+                <artifactId>batchFile</artifactId>
+                <version>${batchFile.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lyw.springboot</groupId>
+                <artifactId>java</artifactId>
+                <version>${lyw-java.version}</version>
             </dependency>
 
             <!--spring-->
@@ -263,5 +284,6 @@
         <module>redis</module>
         <module>annotationInterface</module>
         <module>synchronized</module>
+        <module>spring</module>
     </modules>
 </project>
