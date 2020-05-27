@@ -4,7 +4,8 @@
 3. spring的BeanUtils.copyProperties()在对象类型不同时，会复制为键值对HashMap
 4. list遍历删除时，使用迭代器进行删除
 5. 一字节等于8位
-6. 8种基本类型长度：byte = 1字节（8位）, shor = 2byte, char = 2byte, int = 4byte, float = 4byte, long = 8byte, double = 8byte, boolean = 1bit
+6. 8种基本类型长度：byte = 1字节（8位）, short = 2byte, char = 2byte, int = 4byte, float = 4byte, long = 8byte, double = 8byte, boolean = 1bit
+7。 基本类型长度，n为位数长度。-2^(n-1) ~ 2(n-1)-1
 
 ## 位运算
 ### 异或运算 ^

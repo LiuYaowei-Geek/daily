@@ -5,6 +5,7 @@ import com.lyw.batch.core.resource.Resource;
 import lombok.Data;
 
 import java.io.*;
+import java.io.Reader;
 
 @Data
 public class FileResource implements Resource {
