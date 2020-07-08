@@ -13,7 +13,7 @@ public class DirectorySout {
     public static void main(String[] args) {
         FileOutputStream fos = null;
         try {
-            String path = "I:\\workspace\\base64.txt";
+            String path = "I:\\workspace\\casdoc.txt";
             File file = new File(path);
             byte[] code = getBytefromFile(file);
 
@@ -21,7 +21,7 @@ public class DirectorySout {
 //            System.out.println(encodeBase64);
             byte[] decodeBase64 = Base64.decodeBase64(code);
 
-            fos = new FileOutputStream("I:\\workspace\\lyw.7z");
+            fos = new FileOutputStream("I:\\workspace\\casdoc.7z");
             fos.write(decodeBase64);
             fos.flush();
         } catch (IOException e) {
