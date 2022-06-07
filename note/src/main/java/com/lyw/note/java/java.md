@@ -30,6 +30,7 @@
 5. 一字节等于8位
 6. 8种基本类型长度：byte = 1字节（8位）, short = 2byte, char = 2byte, int = 4byte, float = 4byte, long = 8byte, double = 8byte, boolean = 1bit
 7. 基本类型长度，n为位数长度。-2^(n-1) ~ 2^(n-1)-1
+8. 字符整型大小，a-z:97-122, A-Z:65-90
 
 ## 位运算
 ### 异或运算 ^

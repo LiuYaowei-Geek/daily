@@ -29,7 +29,6 @@
 
 package com.lyw.leetCode.editor.en;
 
-import com.lyw.leetCode.model.ListNode;
 
 import java.util.*;
 
