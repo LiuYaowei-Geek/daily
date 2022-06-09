@@ -25,7 +25,7 @@
         <lyw-spring.version>1.0.0-SNAPSHOT</lyw-spring.version>
         <!--dependencies version-->
         <java.version>1.8</java.version>
-        <dubbo.version>2.5.7</dubbo.version>
+        <dubbo.version>2.6.9</dubbo.version>
         <guava.version>23.0</guava.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
