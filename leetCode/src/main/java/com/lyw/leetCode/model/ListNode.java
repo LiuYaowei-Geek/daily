@@ -16,14 +16,14 @@ public class ListNode {
     public ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 
 
-    @Override
-    public String toString() {
-        ListNode cur = this;
-        StringBuilder sb = new StringBuilder();
-        while (cur != null) {
-            sb.append(cur.val).append("->");
-            cur = cur.next;
-        }
-        return sb.delete(sb.length()-2, sb.length()).toString();
-    }
+    //@Override
+    //public String toString() {
+    //    StringBuilder sb = new StringBuilder();
+    //    sb.append(val).append(" ");
+    //    while (next != null) {
+    //        sb.append(next.val).append(" ");
+    //        next = next.next;
+    //    }
+    //    return sb.toString();
+    //}
 }

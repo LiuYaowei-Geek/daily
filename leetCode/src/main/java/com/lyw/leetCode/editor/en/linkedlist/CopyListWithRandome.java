@@ -1,4 +1,4 @@
-package com.lyw.leetCode.bilibili;
+package com.lyw.leetCode.editor.en.linkedlist;
 
 import com.lyw.leetCode.model.RandomNode;
 
