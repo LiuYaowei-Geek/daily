@@ -52,7 +52,7 @@ public class T_19_RemoveNthNodeFromEndOfList {
         Solution solution = new T_19_RemoveNthNodeFromEndOfList().new Solution();
         // TO TEST
         ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
-        System.out.println(solution.removeNthFromEnd(head, 2));
+        System.out.println(solution.removeNthFromEnd3(head, 2));
 
     }
     //leetcode submit region begin(Prohibit modification and deletion)

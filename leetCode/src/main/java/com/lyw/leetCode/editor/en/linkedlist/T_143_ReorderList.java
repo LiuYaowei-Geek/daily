@@ -44,6 +44,9 @@ package com.lyw.leetCode.editor.en.linkedlist;
 
 import com.lyw.leetCode.model.ListNode;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 //Java：T_143_Reorder List
 public class T_143_ReorderList {
     public static void main(String[] args) {
@@ -76,14 +79,19 @@ public class T_143_ReorderList {
             if (head == null || head.next == null) {
                 return;
             }
+            //取mid.next
             ListNode mid = getMid(head).next;
+            //在mid处断开head，不直接使用mid.next = null，避免mid链表数据变化
             getMid(head).next = null;
+            //翻转mid链表
             mid = reverse(mid);
+            //合并head和mid
             merge(head, mid);
 
             System.out.println(head);
         }
 
+        //快慢直接找链表中点
         public ListNode getMid(ListNode head) {
             if (head == null || head.next == null) {
                 return head;
@@ -96,6 +104,9 @@ public class T_143_ReorderList {
             return slow;
         }
 
+        //初始化返回值res为null
+        //将head头结点拼接res
+        //head指针后移
         public ListNode reverse(ListNode head) {
             if (head == null || head.next == null) {
                 return head;
@@ -110,6 +121,10 @@ public class T_143_ReorderList {
             return res;
         }
 
+        //链表错位合并
+        //123  54
+        //154  523  =>  1523
+        //24   43   =>  15243
         public void merge(ListNode l1, ListNode l2) {
             ListNode next1;
             ListNode next2;
@@ -124,12 +139,32 @@ public class T_143_ReorderList {
                 l2 = next2;
             }
         }
+
+        /**
+         * 使用队列，每次弹出头尾拼接
+         * 组装队列时，需要断开链表，避免出现环形链表
+         * @param head
+         */
+        public void reorderListWithDeque(ListNode head) {
+            if (head == null || head.next == null || head.next.next == null) {
+                return;
+            }
+            Deque<ListNode> deque = new LinkedList<>();
+            while (head != null) {
+                ListNode next = head.next;
+                head.next = null;
+                deque.add(head);
+                head = next;
+            }
+
+            ListNode newHead = new ListNode(0, head), cur = newHead;
+            while (!deque.isEmpty()) {
+                cur.next = deque.pollFirst();
+                cur.next.next = deque.pollLast();
+                cur = cur.next.next;
+            }
+        }
     }
-    /**
-     * 12  34
-     *
-     * 134
-     */
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
