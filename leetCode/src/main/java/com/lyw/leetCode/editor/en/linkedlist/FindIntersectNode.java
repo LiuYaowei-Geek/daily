@@ -67,7 +67,7 @@ public class FindIntersectNode {
         ListNode cur1 = head1;
         ListNode cur2 = head2;
         int n = 0;
-        while (cur1.next != null) {
+        while (cur1 != null) {
             n++;
             cur1 = cur1.next;
         }
@@ -92,7 +92,6 @@ public class FindIntersectNode {
             cur2 = cur2.next;
         }
         return cur1;
-
     }
 
     //两个有环链表，返回第一个相交节点，如果不相交返回null

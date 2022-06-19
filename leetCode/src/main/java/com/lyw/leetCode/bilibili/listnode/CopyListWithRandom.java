@@ -1,16 +1,16 @@
-package com.lyw.leetCode.editor.en.linkedlist;
+package com.lyw.leetCode.bilibili.listnode;
 
 import com.lyw.leetCode.model.RandomNode;
 
 import java.util.HashMap;
 
-public class CopyListWithRandome {
+public class CopyListWithRandom {
 
     public static void main(String[] args) {
 
     }
 
-    private static RandomNode copyListWithRandomeUseHash(RandomNode head) {
+    private static RandomNode copyListWithRandomUseHash(RandomNode head) {
         HashMap<RandomNode, RandomNode> map = new HashMap<>();
         RandomNode cur = head;
 
@@ -27,7 +27,7 @@ public class CopyListWithRandome {
         return map.get(head);
     }
 
-    private static RandomNode copyListWithRandome(RandomNode head) {
+    private static RandomNode copyListWithRandom(RandomNode head) {
         if (head == null) {
             return null;
         }

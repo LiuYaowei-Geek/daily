@@ -62,7 +62,7 @@ public class ListNodePartition {
         //有小于区域
         if (smallTail != null) {
             smallTail.next = equalHead;
-            //下一步，谁去连大于区域的头，谁就变成et
+            //下一步，谁去连大于区域的头，谁就变成equalTail
             equalTail = equalTail == null ? smallTail : equalTail;
         }
         //如果小于区域和等于区域，不是都没有
