@@ -47,41 +47,43 @@ public class T_75_SortColors {
     public static void main(String[] args) {
         Solution solution = new T_75_SortColors().new Solution();
         // TO TEST
-        int[] nums = new int[]{1,2,0};
+        int[] nums = new int[]{1, 2, 0};
         solution.sortColors(nums);
         System.out.println(Arrays.toString(nums));
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-        //双指针
-        ///时间复杂度：O(N) 空间复杂度：O(1)
-    public void sortColors(int[] nums) {
-        if (nums == null || nums.length < 2) {
-            return;
-        }
-        //执行需要和0进行替换的位置
-        int low = 0;
-        //执行需要和2进行替换的位置
-        int high = nums.length - 1;
 
-        for (int i = 0; i <= high; i++) {
-            //两个if判断，不能用if-else
-            if (nums[i] == 0) {
-                swap(nums, i, low++);
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        //双指针，0和2两个指针
+        // 当前位置为0时，和low指针交换，并右移low指针。当前位置为2时，和high指针交换，并左移high指针和当前位置,因为和high指针交换后，需要对当前位置重新判断。
+        ///时间复杂度：O(N) 空间复杂度：O(1)
+        public void sortColors(int[] nums) {
+            if (nums == null || nums.length < 2) {
+                return;
             }
-            //判断完2后需要i--,对i位置重新判断
-            if (nums[i] == 2) {
-                swap(nums, i--, high--);
+            //执行需要和0进行替换的位置
+            int low = 0;
+            //执行需要和2进行替换的位置
+            int high = nums.length - 1;
+
+            for (int i = 0; i <= high; i++) {
+                //两个if判断，不能用if-else
+                if (nums[i] == 0) {
+                    swap(nums, i, low++);
+                }
+                //判断完2后需要i--,对i位置重新判断
+                if (nums[i] == 2) {
+                    swap(nums, i--, high--);
+                }
             }
         }
-    }
 
         private void swap(int[] nums, int i, int j) {
             int temp = nums[i];
             nums[i] = nums[j];
             nums[j] = temp;
         }
-}
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

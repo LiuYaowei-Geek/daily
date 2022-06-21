@@ -62,7 +62,7 @@ public class T_11_ContainerWithMostWater {
             int area = 0, left = 0, right = heights.length - 1;
 
             while (left < right) {
-                //计算狂赌
+                //计算宽度
                 int width = right - left;
                 //取左右指针中数值小的一个，并且移动数值小的指针
                 int height = heights[left] <= heights[right] ? heights[left++] : heights[right--];
@@ -72,11 +72,28 @@ public class T_11_ContainerWithMostWater {
             }
             return area;
         }
+
         /**
          * 1 8 6 2 5 4 8 3 7
          * 0 1 2 3 4 5 6 7 8
          * 0 1
          */
+
+        public int maxArea2(int[] height) {
+            //right要减1，避免数组越界
+            //长度为right - left
+            int left = 0, right = height.length - 1;
+            int res = Math.min(height[left], height[right]) * (right - left);
+            while (left < right) {
+                if (height[left] < height[right]) {
+                    left++;
+                } else {
+                    right--;
+                }
+                res = Math.max(res, Math.min(height[left], height[right]) * (right - left));
+            }
+            return res;
+        }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

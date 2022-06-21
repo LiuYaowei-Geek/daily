@@ -56,34 +56,52 @@ public class T_1_TwoSum {
     public static void main(String[] args) {
         Solution solution = new T_1_TwoSum().new Solution();
         // TO TEST
-        int[] nums = new int[]{3,2,4};
+        int[] nums = new int[]{3, 2, 4};
         int target = 6;
         System.out.println(Arrays.toString(solution.twoSum(nums, target)));
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    //hash表方法，时间复杂度O(n)  空间复杂度O(n)
-    //遍历时间复杂度O(n) ， hash表空间复杂度O(n)
-    public int[] twoSum(int[] nums, int target) {
-        if (nums == null || nums.length < 2) {
+    class Solution {
+        //hash表方法，时间复杂度O(n)  空间复杂度O(n)
+        //遍历时间复杂度O(n) ， hash表空间复杂度O(n)
+        public int[] twoSum(int[] nums, int target) {
+            if (nums == null || nums.length < 2) {
+                return null;
+            }
+            int[] res = new int[2];
+            //key为数值，value为索引
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                //先判断，再放入map，避免[3,3] 6这种类型的数据
+                if (map.containsKey(target - nums[i])) {
+                    res[0] = i;
+                    res[1] = map.get(target - nums[i]);
+                    return res;
+                }
+                map.put(nums[i], i);
+            }
+            return res;
+        }
+
+        /**
+         * 时间复杂度O(n)， 空间复杂度O(n)
+         * 1. 遍历数组，先判断是否包含差值的key，包含的话直接返回i和差值的索引。
+         * 2. map的key存储数组的值，value存储值的索引
+         * 3. 数组遍历时，先判断是否包含key再存入map，避免差值和当前值一样时判断错误。eg: {3,2,4} 和 6
+         */
+        public int[] twoSum2(int[] nums, int target) {
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                if (map.containsKey(target - nums[i])) {
+                    return new int[]{i, map.get(target - nums[i])};
+                }
+                map.put(nums[i], i);
+            }
             return null;
         }
-        int[] res = new int[2];
-        //key为数值，value为索引
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            //先判断，再放入map，避免[3,3] 6这种类型的数据
-            if (map.containsKey(target - nums[i])) {
-                res[0] = i;
-                res[1] = map.get(target - nums[i]);
-                return res;
-            }
-            map.put(nums[i], i);
-        }
-        return res;
-    }
 
-}
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

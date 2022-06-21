@@ -69,7 +69,7 @@ public class T_49_GroupAnagrams {
         }
 
 
-        //数组计数+hashMap，优化排序的耗时
+        //数组计数+hashMap，优化排序的耗时。使用字符数组对记录字符串
         //时间复杂度 O(n(k+|Σ|)) 空间复杂度 O(n(k+|Σ|))。n=strs.length, k = Max(str)，|Σ|=26
         public List<List<String>> groupAnagrams2(String[] strs) {
             if (strs == null || strs.length < 1) {
@@ -83,6 +83,7 @@ public class T_49_GroupAnagrams {
                 //26个小写字母的数组，记录str中每个字母的位置
                 char[] chs = new char[26];
                 for (char c : str.toCharArray()) {
+                    //数组初始化时为0，使用++可以记录str中重复出现的字符
                     chs[c - 'a']++;
                 }
                 //计算key，经过排序保证字母一样的单词，key也一样
