@@ -33,54 +33,57 @@
 
 
 package com.lyw.leetCode.editor.en.array;
+
 //Java：T_238_Product of Array Except Self
 public class T_238_ProductOfArrayExceptSelf {
     public static void main(String[] args) {
         Solution solution = new T_238_ProductOfArrayExceptSelf().new Solution();
         // TO TEST
     }
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[] productExceptSelf(int[] nums) {
-        if (nums == null || nums.length < 2) {
-            return nums;
-        }
-        int[] res = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            int temp = 0;
-            res[i] = 1;
-            while (temp < nums.length) {
-                if (temp != i) {
-                    res[i] *= nums[temp];
-                }
-                temp++;
+    class Solution {
+        public int[] productExceptSelf(int[] nums) {
+            if (nums == null || nums.length < 2) {
+                return nums;
             }
+            int[] res = new int[nums.length];
+            for (int i = 0; i < nums.length; i++) {
+                int temp = 0;
+                res[i] = 1;
+                while (temp < nums.length) {
+                    if (temp != i) {
+                        res[i] *= nums[temp];
+                    }
+                    temp++;
+                }
+            }
+            return res;
         }
-        return res;
-    }
 
-    //时间复杂度O(n)  空间复杂度O(1)
-    public int[] productExceptSelf2(int[] nums) {
-        if (nums == null || nums.length < 2) {
-            return nums;
+        //时间复杂度O(n)  空间复杂度O(1)
+        //先计算每个位置左边数的乘积，再计算每个数右边的乘积，每个位置左边乘积乘以右边乘积即为结果
+        public int[] productExceptSelf2(int[] nums) {
+            if (nums == null || nums.length < 2) {
+                return nums;
+            }
+            int[] res = new int[nums.length];
+            res[0] = 1;
+            //先计算i位置左边数字的乘积
+            for (int i = 1; i < nums.length; i++) {
+                res[i] = res[i - 1] * nums[i - 1];
+            }
+            //right代表当前位置右边数字的乘积
+            int right = 1;
+            //每个位置的结果等于当前位置左边数字的乘积乘以右边数字的乘积
+            for (int i = nums.length - 1; i >= 0; i--) {
+                res[i] *= right;
+                right *= nums[i];
+            }
+            return res;
         }
-        int[] res = new int[nums.length];
-        res[0] = 1;
-        //先计算i位置左边数字的乘积
-        for (int i = 1; i < nums.length; i++) {
-            res[i] = res[i - 1] * nums[i - 1];
-        }
-        //right代表当前位置右边数字的乘积
-        int right = 1;
-        //每个位置的结果等于当前位置左边数字的乘积乘以右边数字的乘积
-        for (int i = nums.length - 1; i >= 0; i--) {
-            res[i] *= right;
-            right *= nums[i];
-        }
-        return res;
-    }
 
-}
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

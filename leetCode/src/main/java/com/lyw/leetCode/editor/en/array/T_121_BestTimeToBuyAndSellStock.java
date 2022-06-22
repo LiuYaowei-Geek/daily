@@ -40,7 +40,7 @@
 
 package com.lyw.leetCode.editor.en.array;
 //Java：T_121_Best Time to Buy and Sell Stock
-public class T_121_BestTimeToBuyAndSellStock {
+public class  T_121_BestTimeToBuyAndSellStock {
     public static void main(String[] args) {
         Solution solution = new T_121_BestTimeToBuyAndSellStock().new Solution();
         // TO TEST
