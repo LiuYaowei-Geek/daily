@@ -53,13 +53,21 @@ public class T_213_HouseRobberIi {
         Solution solution = new T_213_HouseRobberIi().new Solution();
         // TO TEST
         int[] nums = new int[]{2, 3, 2, 1, 4};
-        System.out.println(solution.rob(nums));
+        int[] nums2 = new int[]{1,2,3,1};
+//        System.out.println(solution.rob(nums));
+        System.out.println(solution.rob2(nums2));
 
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        //时间复杂度O(n), 空间复杂度O(1)
+        /**
+         * 时间复杂度O(n), 空间复杂度O(1)
+         * 1. 拆分成两段
+         * 2. 不偷最后一间房，范围是[0, n-2]
+         * 3. ，范围是[1, n-1]
+         * 4. 两部分组合可以完全覆盖整个数组，结果即是两部分结果取最大值
+         */
         public int rob(int[] nums) {
             if (nums == null || nums.length < 1) {
                 return 0;
@@ -85,6 +93,26 @@ public class T_213_HouseRobberIi {
                 first = temp;
             }
             return second;
+        }
+
+        public int rob2(int[] nums) {
+            if (nums.length == 1) {
+                return nums[0];
+            }
+            if (nums.length == 2) {
+                return Math.max(nums[0], nums[1]);
+            }
+            return Math.max(robSub(nums, 0, nums.length-2), robSub(nums, 1, nums.length-1));
+        }
+
+        private int robSub(int[] nums, int start, int end) {
+            int[] dp = new int[end - start + 1];
+            dp[0] = nums[start];
+            dp[1] = Math.max(nums[start], nums[start+1]);
+            for (int i = 2; i < end-start+1; i++) {
+                dp[i] = Math.max(dp[i-1], dp[i-2] + nums[start+i]);
+            }
+            return dp[end - start];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -53,7 +53,15 @@ public class T_33_SearchInRotatedSortedArray {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        //二分，时间复杂度O(logn)  空间复杂度O(1)
+        /**
+         * 二分，时间复杂度O(logn)  空间复杂度O(1)
+         * 原始输入： 数组：0124567 ， target:0
+         * 1. 有序数组旋转后，一半有序，一半右拐点
+         * 2. mid == target时，直接返回mid
+         * 3. 旋转后数组左半部分有序，如果target在[left, mid)区间中（mid位置为开区间，不用重复判断），舍掉右半部分，赋值right=mid-1；否则舍掉左半部分，left=mid+1;
+         * 4. 旋转后数组右半部分有序，如果target在(mid, right]区间中（mid位置为开区间，不用重复判断），舍掉左半部分，赋值left=mid+1；否则舍掉右半部分，right=mid-1;
+         * 5. 最终left=right， 判断值是否和target相等，相等返回索引，否则返回-1
+         */
         public int search(int[] nums, int target) {
             int left = 0, right = nums.length - 1;
             //left < right

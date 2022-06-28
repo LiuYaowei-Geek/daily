@@ -55,8 +55,13 @@ public class T_300_LongestIncreasingSubsequence {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        //动态规划，时间复杂度O(n^2), 空间复杂度O(n)
-        //两次循环，找当前位置最长上升子序列长度，dp[i] = Math.max(dp[i], dp[j] + 1)
+        /**
+         * 动态规划，时间复杂度O(n^2), 空间复杂度O(n)
+         * 两次循环，找当前位置最长上升子序列长度，dp[i] = Math.max(dp[i], dp[j] + 1)
+         * 1. 初始化dp[0]=1,返回结果为1
+         * 2. 双层遍历，dp[i]初始化为1，当nums[i] > nums[j]时，dp[i] = Math.max(dp[i], dp[j] + 1)
+         * 3. 内层遍历完时，res=Math.max(res, dp[i]);
+         */
         public int lengthOfLIS(int[] nums) {
             //base case
             if (nums == null || nums.length < 1) {

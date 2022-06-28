@@ -41,12 +41,16 @@ public class T_55_JumpGame {
         Solution solution = new T_55_JumpGame().new Solution();
         // TO TEST
         int[] nums = new int[]{3, 2, 1, 0, 4};
-        System.out.println(solution.canJump(nums));
+        int[] nums3 = new int[]{2, 3, 1, 1, 4};
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        //贪心 时间复杂度O(n), 空间复杂度O(1)
+        /**
+         * 贪心 时间复杂度O(n), 空间复杂度O(1)
+         * 1. 遍历，记录最大到达位置maxReach，初始化为0，每次取值Math.max(maxReach, nums[i] + i)
+         * 2. 遍历计算maxReach前，需先判断（i > maxReach），（i > maxReach）表示永远走不到i位置
+         */
         public boolean canJump(int[] nums) {
             int maxReach = 0;
             for (int i = 0; i < nums.length; i++) {
@@ -69,7 +73,7 @@ public class T_55_JumpGame {
                 for (int j = 0; j <= nums[i] && i + j < n; j++)
                     if (dp[i + j]) {
                         dp[i] = true;
-                        //推出当前层的循环
+                        //退出当前层的循环
                         break;
                     }
             }

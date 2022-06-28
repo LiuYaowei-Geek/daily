@@ -59,9 +59,9 @@ public class T_152_MaximumProductSubarray {
             for (int i = 1; i < nums.length; i++) {
                 //临时变量记录当前max值，避免后续使用max计算时，max值变化了
                 int tempMax = max;
-                //max * nums[i]、min * nums[i]和nums[i]三者取最大值
+                //max * nums[i]、min * nums[i]和nums[i]三者取最大值。重点：是和nums[i]比较
                 max = Math.max(Math.max(max * nums[i], min * nums[i]), nums[i]);
-                //tempMax * nums[i]、min * nums[i]和nums[i]三者取最小值
+                //tempMax * nums[i]、min * nums[i]和nums[i]三者取最小值。重点：是和nums[i]比较
                 min = Math.min(Math.min(tempMax * nums[i], min * nums[i]), nums[i]);
                 //max和res取最大值
                 res = Math.max(max, res);

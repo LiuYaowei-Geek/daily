@@ -75,7 +75,9 @@ public class T_91_DecodeWays {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        //时间复杂度O(n), 空间复杂度O(n)，空间复杂度可以通过间数组换成有限的变量降为O(1)
+        /**
+         * 时间复杂度O(n), 空间复杂度O(n)，空间复杂度可以通过间数组换成有限的变量降为O(1)
+         */
         public int numDecodings(String s) {
             if (s == null || s.length() == 0) {
                 return 0;
@@ -86,7 +88,7 @@ public class T_91_DecodeWays {
             dp[1] = s.charAt(0) != '0' ? 1 : 0;
             for (int i = 2; i <= n; i++) {
                 //当前字符属于[0,9]，dp[i] = dp[i-1]
-                int first = Integer.valueOf(s.substring(i - 1, i));
+                int first = Integer.parseInt(s.substring(i - 1, i));
                 if (first >= 1 && first <= 9) {
                     //由于dp[i]初始值为0，可以写成dp[i] = dp[i - 1]
                     dp[i] += dp[i - 1];
@@ -100,6 +102,33 @@ public class T_91_DecodeWays {
                 }
             }
             return dp[n];
+        }
+
+        /**
+         * 时间复杂度O(n), 空间复杂度O(n)，空间复杂度可以通过间数组换成有限的变量降为O(1)
+         * 1. 初始化dp整型数组，值全为0
+         * 2. 从索引1位置开始遍历，如果当前数值在[1,9]区间内，dp[i] = dp[i-1]；当前数值是0时，dp[i]保持为0
+         * 3. 如果当前数值加上前一位数值在[10,26]区间内，的dp[i]=dp[i]+dp[i-2]，索引小于2时，dp[i]=dp[i]+1；
+         */
+        public int numDecodings2(String s) {
+            if (s == null || s.length() == 0) {
+                return 0;
+            }
+            int n = s.length();
+            int[] dp = new int[n];
+            dp[0] = s.charAt(0) != '0' ? 1 : 0;
+            for (int i = 1; i < n; i++) {
+                //使用Integer.parseInt可以避免拆箱
+                int first = Integer.parseInt(s.substring(i, i + 1));
+                if (first >= 1 && first <= 9) {
+                    dp[i] = dp[i - 1];
+                }
+                int second = Integer.valueOf(s.substring(i - 1, i + 1));
+                if (second >= 10 && second <= 26) {
+                    dp[i] = i >= 2 ? dp[i] + dp[i - 2] : dp[i] + 1;
+                }
+            }
+            return dp[n - 1];
         }
     }
     /**

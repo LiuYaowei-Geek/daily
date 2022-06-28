@@ -64,7 +64,11 @@ public class T_139_WordBreak {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        //dp，时间复杂度O(n^2) 空间复杂度O(n)
+        /**
+         * dp，时间复杂度O(n^2) 空间复杂度O(n)
+         * 双层循环，单层循环不具备回溯能力，只能按顺序检索一次。将字符串分成0到j-1和j到i-1两部分
+         * 状态转移方程：dp[i] = dp[j] && set.contains(s.substring(j, i))
+         */
         public boolean wordBreak(String s, List<String> wordDict) {
             if (s == null || s.length() < 1) {
                 return true;

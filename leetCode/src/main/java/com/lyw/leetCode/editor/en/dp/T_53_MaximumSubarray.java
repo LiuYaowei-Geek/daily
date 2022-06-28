@@ -42,6 +42,7 @@
 
 
 package com.lyw.leetCode.editor.en.dp;
+
 //Java：T_53_Maximum Subarray
 public class T_53_MaximumSubarray {
     public static void main(String[] args) {
@@ -51,36 +52,41 @@ public class T_53_MaximumSubarray {
         System.out.println(solution.maxSubArray1(nums));
 
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    //动态规划，时间复杂度O(n)， 空间复杂度O(1)
-    public int maxSubArray(int[] nums) {
-        if (nums == null || nums.length < 1) {
-            return 0;
-        }
-        int maxSoFar = nums[0];
-        int maxEndingHere = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            maxEndingHere = Math.max(maxEndingHere + nums[i], nums[i]);
-            maxSoFar = Math.max(maxEndingHere, maxSoFar);
-        }
-        return maxSoFar;
-    }
 
-    public int maxSubArray1(int[] nums) {
-        if (nums == null || nums.length < 1) {
-            return 0;
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        /**
+         * 动态规划，时间复杂度O(n)， 空间复杂度O(1)
+         * 1. maxSoFar为迄今为止的最大值，maxEndingHere为包含当前位置的最大值
+         * 2. 每次遍历时，maxEndingHere取Math.max(maxEndingHere + nums[i], nums[i])； maxSoFar取Math.max(maxEndingHere, maxSoFar)
+         */
+        public int maxSubArray(int[] nums) {
+            if (nums == null || nums.length < 1) {
+                return 0;
+            }
+            int maxSoFar = nums[0];
+            int maxEndingHere = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                maxEndingHere = Math.max(maxEndingHere + nums[i], nums[i]);
+                maxSoFar = Math.max(maxEndingHere, maxSoFar);
+            }
+            return maxSoFar;
         }
-        int maxSoFar = Integer.MIN_VALUE;
-        int maxEndingHere = Integer.MIN_VALUE;
-        for (int cur : nums) {
-            //当cur为负数时，会数组越界，结果计算错误
-            maxEndingHere = Math.max(maxEndingHere + cur, cur);
-            maxSoFar = Math.max(maxEndingHere, maxSoFar);
+
+        public int maxSubArray1(int[] nums) {
+            if (nums == null || nums.length < 1) {
+                return 0;
+            }
+            int maxSoFar = Integer.MIN_VALUE;
+            int maxEndingHere = Integer.MIN_VALUE;
+            for (int cur : nums) {
+                //当cur为负数时，会数组越界，结果计算错误
+                maxEndingHere = Math.max(maxEndingHere + cur, cur);
+                maxSoFar = Math.max(maxEndingHere, maxSoFar);
+            }
+            return maxSoFar;
         }
-        return maxSoFar;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
