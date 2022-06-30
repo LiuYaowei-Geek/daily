@@ -72,7 +72,7 @@ public class T_57_InsertInterval {
             int left = newInterval[0], right = newInterval[1];
             List<int[]> list = new ArrayList<>();
             int i = 0;
-            //当前区间有边界小于插入区间做边界，直接添加
+            //当前区间右边界小于插入区间左边界，直接添加
             while (i < intervals.length && intervals[i][1] < left) {
                 list.add(intervals[i++]);
             }

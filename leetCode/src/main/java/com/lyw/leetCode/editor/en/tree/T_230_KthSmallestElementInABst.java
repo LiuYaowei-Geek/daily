@@ -37,6 +37,8 @@ package com.lyw.leetCode.editor.en.tree;
 
 import com.lyw.leetCode.model.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 //Java：T_230_Kth Smallest Element in a BST
@@ -66,9 +68,6 @@ public class T_230_KthSmallestElementInABst {
         /**
          * 中序遍历
          * 时间复杂度O(n)， 空间复杂度O(n)
-         * @param root
-         * @param k
-         * @return
          */
         public int kthSmallest(TreeNode root, int k) {
             Stack<TreeNode> stack = new Stack<>();
@@ -86,6 +85,21 @@ public class T_230_KthSmallestElementInABst {
                 root = root.right;
             }
             throw new IllegalArgumentException("error input");
+        }
+
+        private final List<Integer> list = new ArrayList<>();
+        public int kthSmallestWithRecursion(TreeNode root, int k) {
+            inorder(root);
+            return list.get(k-1);
+        }
+
+        private void inorder(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+            inorder(root.left);
+            list.add(root.val);
+            inorder(root.right);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
