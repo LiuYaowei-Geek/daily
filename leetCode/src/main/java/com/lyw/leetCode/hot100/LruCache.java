@@ -56,85 +56,97 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
-  * questionId：146
-  * question：LRU Cache
-  * date：2022-03-21 22:45:53
-*/
+ * questionId：146
+ * question：LRU Cache
+ * date：2022-03-21 22:45:53
+ */
 public class LruCache {
     public static void main(String[] args) {
         System.out.println("Hello world");
     }
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
-class LRUCache {
-    //固定的头结点
-    Node head = new Node(0, 0);
-    //固定的尾结点
-    Node tail = new Node(0, 0);
-    //缓存实现
-    Map<Integer, Node> map = new HashMap<>();
-    //容量
-    int CAPACITY;
 
-    public LRUCache(int capacity) {
-        //初始化
-        CAPACITY = capacity;
-        //头尾相连
-        head.next = tail;
-        tail.prev = head;
-    }
+    /**
+     * 1.使用链表，每个节点记录pre和next节点。
+     * 2.使用head和tail记录LRUCache的头和尾，head和tail都是空节点，作为标识位，因为超出缓存容量时要删除最后一个节点。初始化时头尾相连
+     * 3. LRU.get()时，先删除对应节点，再插入节点
+     * 4. LRU.put()时，cache中存在时，先删除节点再插入节点。cache中不存在时，没到最大容量时直接插入，到最大容量时，先删除再插入
+     * 5. 缓存插入节点时，节点始终保持在head后，因此需要修改head.next、head.next.pre、cur.pre、cur.next
+     * 6. 缓存删除节点时，需要修改cur.pre.next和cur.next.pre；
+     */
+    class LRUCache {
 
-    public int get(int key) {
-        if(map.containsKey(key)) {
-            Node node = map.get(key);
-            //先删除再插入，保证node排在最前面(head后面)
-            remove(node);
-            insert(node);
-            return node.value;
-        } else {
-            return -1;
+        class Node {
+            Node prev, next;
+            int key, value;
+
+            Node(int key, int value) {
+                this.key = key;
+                this.value = value;
+            }
         }
-    }
 
-    public void put(int key, int value) {
-        //存在时，先删除
-        if(map.containsKey(key)) {
-            remove(map.get(key));
+        //固定的头结点
+        Node head = new Node(0, 0);
+        //固定的尾结点
+        Node tail = new Node(0, 0);
+        //缓存实现
+        Map<Integer, Node> map = new HashMap<>();
+        //容量
+        int CAPACITY;
+
+        public LRUCache(int capacity) {
+            //初始化
+            CAPACITY = capacity;
+            //头尾相连
+            head.next = tail;
+            tail.prev = head;
         }
-        //达到最大容量时，删除最后一个节点(tail前一个节点)
-        if(map.size() == CAPACITY) {
-            remove(tail.prev);
+
+        public int get(int key) {
+            if (map.containsKey(key)) {
+                Node node = map.get(key);
+                //先删除再插入，保证node排在最前面(head后面)
+                remove(node);
+                insert(node);
+                return node.value;
+            } else {
+                return -1;
+            }
         }
-        //插入
-        insert(new Node(key, value));
-    }
 
-    //删除节点，需要修改node前后的节点
-    private void remove(Node node) {
-        map.remove(node.key);
-        node.prev.next = node.next;
-        node.next.prev = node.prev;
-    }
-
-    //插入节点，需要修改node前后包含node节点的prev和next值
-    private void insert(Node node) {
-        map.put(node.key, node);
-        Node headNext = head.next;
-        head.next = node;
-        node.prev = head;
-        headNext.prev = node;
-        node.next = headNext;
-    }
-
-    class Node {
-        Node prev, next;
-        int key, value;
-        Node(int _key, int _value) {
-            key = _key;
-            value = _value;
+        public void put(int key, int value) {
+            //存在时，先删除
+            if (map.containsKey(key)) {
+                remove(map.get(key));
+            }
+            //达到最大容量时，删除最后一个节点(tail前一个节点)
+            if (map.size() == CAPACITY) {
+                remove(tail.prev);
+            }
+            //插入
+            insert(new Node(key, value));
         }
+
+        //删除节点，需要修改node前后的节点
+        private void remove(Node node) {
+            map.remove(node.key);
+            node.prev.next = node.next;
+            node.next.prev = node.prev;
+        }
+
+        //插入节点，需要修改node前后包含node节点的prev和next值
+        private void insert(Node node) {
+            map.put(node.key, node);
+            Node headNext = head.next;
+            head.next = node;
+            node.prev = head;
+            headNext.prev = node;
+            node.next = headNext;
+        }
+
     }
-}
 
     class LRUCacheWithLinkedHashMap {
 
@@ -143,7 +155,7 @@ class LRUCache {
 
         public LRUCacheWithLinkedHashMap(int capacity) {
             CAPACITY = capacity;
-            map = new LinkedHashMap<Integer, Integer>(capacity, 0.75f, true){
+            map = new LinkedHashMap<Integer, Integer>(capacity, 0.75f, true) {
                 @Override
                 protected boolean removeEldestEntry(Map.Entry eldest) {
                     return size() > CAPACITY;
