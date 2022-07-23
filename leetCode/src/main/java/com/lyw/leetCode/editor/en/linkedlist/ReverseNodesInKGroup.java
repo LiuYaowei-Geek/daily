@@ -88,37 +88,35 @@ class Solution {
 
     //https://leetcode.com/problems/reverse-nodes-in-k-group/discuss/11440/Non-recursive-Java-solution-and-idea
     public ListNode reverseKGroupNoRecursion(ListNode head, int k) {
-        ListNode begin;
         if (head==null || head.next ==null || k==1)
             return head;
-        ListNode dummyhead = new ListNode(-1);
-        dummyhead.next = head;
-        begin = dummyhead;
-        int i=0;
+        ListNode dummy = new ListNode(0, head);
+        ListNode begin = dummy;
+        int i=1;
         while (head != null){
-            i++;
             if (i%k == 0){
                 begin = reverse(begin, head.next);
                 head = begin.next;
             } else {
                 head = head.next;
             }
+            i++;
         }
-        return dummyhead.next;
+        return dummy.next;
     }
     public ListNode reverse(ListNode begin, ListNode end){
-        ListNode curr = begin.next;
-        ListNode next, first;
-        ListNode prev = begin;
-        first = curr;
-        while (curr!=end){
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
+        ListNode cur = begin.next;
+        ListNode pre = begin;
+        ListNode first;
+        first = cur;
+        while (cur != end){
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
         }
-        begin.next = prev;
-        first.next = curr;
+        begin.next = pre;
+        first.next = cur;
         return first;
     }
 }
