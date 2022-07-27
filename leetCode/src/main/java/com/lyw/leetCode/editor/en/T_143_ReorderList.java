@@ -49,7 +49,7 @@ public class T_143_ReorderList {
     public static void main(String[] args) {
         Solution solution = new T_143_ReorderList().new Solution();
         // TO TEST
-        ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+        ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6, new ListNode(7)))))));
         solution.reorderList(head);
 
     }
@@ -76,6 +76,7 @@ public class T_143_ReorderList {
             if (head == null || head.next == null) {
                 return;
             }
+            //不能直接ListNode mid = reverse(getMid(head).next)，这样会改变head链表数据。导致结果错误
             ListNode mid = getMid(head).next;
             getMid(head).next = null;
             mid = reverse(mid);

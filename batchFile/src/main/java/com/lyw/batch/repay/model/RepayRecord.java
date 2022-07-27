@@ -2,10 +2,12 @@ package com.lyw.batch.repay.model;
 
 import com.lyw.batch.core.step.DefaultItem;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.math.BigDecimal;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ToString(callSuper = true)
 public class RepayRecord extends DefaultItem {
