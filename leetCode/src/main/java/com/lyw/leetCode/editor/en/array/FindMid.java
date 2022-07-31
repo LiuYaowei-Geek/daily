@@ -17,10 +17,10 @@ public class FindMid {
          * 4.遍历完成时，小根堆里保存的是数组中较大部分的值
          * 5.数组长度为奇数时，直接返回队列头的值；数组长度为偶数时，返回队列前两个值的平均数
          * eg:
-         * 2,4,1,5,7
-         * 2,4,1  4,2,1
-         * 4,2,5  5,4,2
-         * 5,4,7  7,5,4
+         * array: 2,4,1,5,7
+         * 2,4,1 -> 4,2,1
+         * 4,2,5 -> 5,4,2
+         * 5,4,7 -> 7,5,4
          */
         public double findMid(int[] arr) {
             PriorityQueue<Integer> heap = new PriorityQueue<>();

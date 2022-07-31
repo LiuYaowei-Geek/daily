@@ -57,7 +57,12 @@ public class T_3_LongestSubstringWithoutRepeatingCharacters {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        //滑动窗口，时间复杂度O(n), 空间复杂度O(n)
+        /**
+         * 滑动窗口，时间复杂度O(n), 空间复杂度O(n)
+         * 1. left等于0或者当前字符位置加一
+         * 2. 将当前字符和当前位置放入map
+         * 3. max = Math.max(max, end - start + 1);
+         */
         public int lengthOfLongestSubstring(String s) {
             if (s == null || s.length() < 1) {
                 return 0;

@@ -61,6 +61,47 @@ public class T_25_ReverseNodesInKGroup {
      * }
      */
     class Solution {
+
+        public ListNode reverseKGroup2(ListNode head, int k) {
+            int i = 1;
+            ListNode cur = head;
+            while (cur != null) {
+                cur = cur.next;
+                if (i % k == 0) {
+                    head = reverse(head, i - k + 1, i);
+                }
+                i++;
+            }
+            return head;
+        }
+
+        private ListNode reverse(ListNode head, int left, int right) {
+            ListNode dummy = new ListNode(0, head);
+            ListNode pre = dummy;
+            int count = 1;
+            while (pre != null && count < left) {
+                pre = pre.next;
+                count++;
+            }
+            ListNode preNext = pre.next;
+            ListNode post = preNext;
+            while (post != null && count < right) {
+                post = post.next;
+                count++;
+            }
+            ListNode postNext = post.next;
+            post.next = null;
+            pre.next = null;
+            preNext = reverse(preNext);
+            pre.next = preNext;
+            //重点，不能直接preNext.next = postNext
+            while (preNext.next != null) {
+                preNext = preNext.next;
+            }
+            preNext.next = postNext;
+            return dummy.next;
+        }
+
         public ListNode reverseKGroup(ListNode head, int k) {
             if (k == 1) {
                 return head;
