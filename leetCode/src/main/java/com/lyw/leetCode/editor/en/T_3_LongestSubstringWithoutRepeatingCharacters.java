@@ -76,6 +76,24 @@ public class T_3_LongestSubstringWithoutRepeatingCharacters {
             }
             return max;
         }
+
+        public int lengthOfLongestSubstring2(String s) {
+            if (s.length() < 2) {
+                return s.length();
+            }
+            Map<Character, Integer> map = new HashMap<>();
+            int max = 0;
+            for (int left = 0, right = 0; right < s.length(); right++) {
+                char rightPoint = s.charAt(right);
+                if (map.containsKey(rightPoint)) {
+                    //避免left左移，inputExample:abba
+                    left = Math.max(left, map.get(rightPoint) + 1);
+                }
+                map.put(rightPoint, right);
+                max = Math.max(max, right - left + 1);
+            }
+            return max;
+        }
     }
     /**
      * abcabcbb
